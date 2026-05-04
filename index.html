@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>This is for my lovely Mumma😘❤️</title>
+</head>
+
+<body style="
+margin:0;
+font-family:Segoe UI, sans-serif;
+text-align:center;
+overflow:hidden;
+background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffdde1, #fcb69f);
+background-size:400% 400%;
+animation: gradientBG 12s ease infinite;
+">
+
+<!-- 🌫️ Blur -->
+<div style="
+position:fixed;
+width:100%;
+height:100%;
+backdrop-filter:blur(8px);
+background:rgba(0,0,0,0.3);
+z-index:0;
+"></div>
+
+<!-- 💌 Start Screen -->
+<div id="startScreen" style="
+position:fixed;
+width:100%;
+height:100%;
+background:#887979;
+background-image: url(background4.jpeg);
+background-size: cover;
+background-size: cover;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+z-index:10;
+">
+<h2 style="font-family:Georgia, 'Times New Roman', Times, serif;"> 💌 A Small Surprise for MY Mumma 💌</h2>
+<button onclick="startSurprise()" style="
+padding:12px 25px;
+border:none;
+border-radius:20px;
+background:white;
+color:#ff4b5c;
+font-size:16px;
+cursor:pointer;
+"> Click me mumma💖</button>
+</div>
+
+<!-- 💖 MAIN CONTENT -->
+<div id="mainContent" style="display:none; position:relative; z-index:1;">
+
+<div style="
+margin:60px auto;
+padding:20px;
+width:90%;
+max-width:380px;
+background:rgba(151, 24, 126, 0.15);
+background-image: url(background.jpeg);
+background-size: cover;
+border-radius:20px;
+backdrop-filter:blur(15px);
+color:black;
+animation:pulse 2s infinite;
+">
+
+<h1>Dear Mumma ❤️</h1>
+
+<p id="loveText"></p>
+
+<!-- 🎬 SLIDER -->
+<div id="slider" style="
+position:relative;
+height:300px;
+overflow:hidden;
+border-radius:15px;
+">
+
+<div id="progressContainer" style="
+position:absolute;
+top:10px;
+left:10px;
+right:10px;
+display:flex;
+gap:5px;
+z-index:5;
+"></div>
+
+<div id="slides" style="
+display:flex;
+height:100%;
+transition:transform 0.5s ease;
+">
+
+<img src="img4.png" style="min-width:100%;height:100%;object-fit:cover;">
+<img src="img2.png" style="min-width:100%;height:100%;object-fit:cover;">
+<img src="img3.png" style="min-width:100%;height:100%;object-fit:cover;">
+
+</div>
+</div>
+
+<!-- 🎵 MUSIC BUTTON -->
+<button id="musicBtn" onclick="toggleMusic()" style="
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#fff;
+color:#ff4b5c;
+font-size:14px;
+cursor:pointer;
+">
+▶️ Play Music
+</button>
+
+<!-- 🎵 AUDIO -->
+<audio id="bgMusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<p> You are my first love 💞, my strength, my world🌺🌍</p>
+
+</div>
+</div>
+
+<script>
+
+// 💌 START
+function startSurprise(){
+document.getElementById("startScreen").style.display="none";
+document.getElementById("mainContent").style.display="block";
+
+document.getElementById("loveText").innerHTML="";
+i=0;type();
+
+initSlider();
+}
+
+// 💬 TEXT
+let text="Mumma... You the reason I smile every day. 💖 Thank you for every sacrifice, every love every hug, every love🥹. I love you more than words can say ❤️";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("loveText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,50);
+}
+}
+
+// ❤️ HEARTS
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="❤️❤️";
+
+h.style.position="absolute";
+h.style.left=Math.random()*innerWidth+"px";
+h.style.top="100vh";
+h.style.fontSize="20px";
+h.style.animation="float 5s linear";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+// ❤️ HEARTS
+setInterval(()=>{
+let h=document.createElement("div");
+
+h.innerHTML="Happy mother's day🥳";
+h.style.position="absolute";
+h.style.left=Math.random()*innerWidth+"px";
+h.style.top="100vh";
+h.style.fontSize="20px";
+h.style.animation="float 5s linear";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},300);
+
+// ✨ SPARKLES
+setInterval(()=>{
+let s=document.createElement("div");
+s.innerHTML="✨✨";
+s.style.position="absolute";
+s.style.left=Math.random()*innerWidth+"px";
+s.style.top=Math.random()*innerHeight+"px";
+s.style.fontSize="12px";
+s.style.animation="spark 2s linear";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+},200);
+
+// 📱 SLIDER
+let slider,slides,current=0,auto,dur=3000;
+
+function initSlider(){
+slider=document.getElementById("slider");
+slides=document.getElementById("slides");
+
+createBars();
+update();
+autoPlay();
+
+slider.onclick=e=>{
+if(e.offsetX<slider.clientWidth/2)prev();else next();
+animate();autoPlay();
+};
+}
+
+function update(){
+slides.style.transform=`translateX(-${current*100}%)`;
+[...slides.children].forEach((img,i)=>{
+img.style.transform=i===current?"scale(1.05)":"scale(1)";
+img.style.transition="0.5s";
+});
+}
+
+function next(){current=(current+1)%slides.children.length;update()}
+function prev(){current=(current-1+slides.children.length)%slides.children.length;update()}
+
+// 📶 PROGRESS BARS
+function createBars(){
+let c=document.getElementById("progressContainer");
+c.innerHTML="";
+for(let i=0;i<slides.children.length;i++){
+let b=document.createElement("div");
+b.style.flex="1";
+b.style.height="3px";
+b.style.background="rgba(255,255,255,0.3)";
+b.style.borderRadius="5px";
+
+let f=document.createElement("span");
+f.style.display="block";
+f.style.height="100%";
+f.style.width="0%";
+f.style.background="white";
+
+b.appendChild(f);
+c.appendChild(b);
+}
+}
+
+function animate(){
+let bars=document.querySelectorAll("#progressContainer span");
+bars.forEach((b,i)=>{
+b.style.transition="none";
+b.style.width=i<current?"100%":"0%";
+});
+let a=bars[current];
+setTimeout(()=>{
+a.style.transition=`${dur}ms linear`;
+a.style.width="100%";
+},50);
+}
+
+function autoPlay(){
+clearInterval(auto);
+animate();
+auto=setInterval(()=>{next();animate()},dur);
+}
+
+// 🎵 MUSIC + BEAT PULSE
+let isPlaying=false;
+
+function toggleMusic(){
+let m=document.getElementById("bgMusic");
+let btn=document.getElementById("musicBtn");
+
+if(!isPlaying){
+m.volume=0;
+m.play();
+
+// fade in
+let v=0;
+let f=setInterval(()=>{
+if(v<1){v+=0.05;m.volume=v;}
+else clearInterval(f);
+},200);
+
+// 💓 pulse start
+btn.style.animation="beatPulse 1s infinite";
+
+btn.innerHTML="⏸️ Pause Music";
+isPlaying=true;
+
+}else{
+m.pause();
+btn.style.animation="none";
+btn.innerHTML="▶️ Play Music";
+isPlaying=false;
+}
+}
+
+// 🎨 INLINE ANIMATIONS
+let style=document.createElement("style");
+style.innerHTML=`
+@keyframes float{from{transform:translateY(0)}to{transform:translateY(-100vh);opacity:0}}
+@keyframes spark{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+@keyframes beatPulse{
+0%{transform:scale(1);box-shadow:0 0 0 rgba(255,255,255,0.5)}
+50%{transform:scale(1.15);box-shadow:0 0 20px rgba(255,255,255,0.8)}
+100%{transform:scale(1);box-shadow:0 0 0 rgba(255,255,255,0.5)}
+}
+`;
+document.head.appendChild(style);
+
+</script>
+
+</body>
+</html>
